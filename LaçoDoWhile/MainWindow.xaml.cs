@@ -16,6 +16,7 @@ namespace LaçoDoWhile;
 /// </summary>
 public partial class MainWindow : Window
 {
+    int numeroDigitadoConvertido;
     public MainWindow()
     {
         InitializeComponent();
@@ -25,7 +26,21 @@ public partial class MainWindow : Window
     private void ComecarSortear(object sender, RoutedEventArgs e)
     {
         string numeroDigitado = tbNumeroEscolhido.Text;
-        int numeroDigitadoConvertido = Convert.ToInt32(numeroDigitado);
+        try
+        {
+            numeroDigitadoConvertido = Convert.ToInt32(numeroDigitado);
+        }
+        catch (FormatException)
+        {
+            MessageBox.Show("Entrada inválida! Coloque apenas números de 1 a 10.");
+            return;
+        }
+        catch (OverflowException)
+        {
+            MessageBox.Show("Erro! O número digitado é maior que o número suportado.");
+            return;
+        }
+        
 
         if (numeroDigitadoConvertido < 0 || numeroDigitadoConvertido > 10)
         {
